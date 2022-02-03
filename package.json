@@ -1,6 +1,6 @@
 {
   "name": "@dcspark/catalyst-registration-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Javascript library reference implementation for CIP-15",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
