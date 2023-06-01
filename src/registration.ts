@@ -15,6 +15,8 @@ export const CatalystLabels = {
   SIG: 61285,
 } as const;
 
+const CATALYST_PURPOSE = 0;
+
 function prefix0x(hex: string): string {
   if (hex.startsWith("0x")) {
     return hex;
@@ -43,10 +45,11 @@ export function generateRegistrationMetadata(
    * A transaction is submitted with following metadata format for the registration process
    * label: 61284
    * {
-   *   1: "pubkey generated for catalyst app",
+   *   1: delegations: [ a tuple of ["pubkey generated for catalyst app", voting_weight (int)]],
    *   2: "stake key public key",
    *   3: "address to receive rewards to"
-   *   4: "slot number"
+   *   4: "slot number",
+   *   5: "voting purpose" (catalyst = 0)
    * }
    * label: 61285
    * {
@@ -55,10 +58,11 @@ export function generateRegistrationMetadata(
    */
   const registrationData = csl.encode_json_str_to_metadatum(
     JSON.stringify({
-      "1": prefix0x(votingPublicKey),
+      "1": [[prefix0x(votingPublicKey), 1]],
       "2": prefix0x(stakingPublicKey),
       "3": prefix0x(rewardAddress),
       "4": nonce,
+      "5": CATALYST_PURPOSE,
     }),
     csl.MetadataJsonSchema.BasicConversions
   );
