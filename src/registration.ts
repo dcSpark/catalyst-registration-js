@@ -15,7 +15,7 @@ export const CatalystLabels = {
   SIG: 61285,
 } as const;
 
-const CATALYST_PURPOSE = 0;
+export const CATALYST_PURPOSE = 0;
 
 function prefix0x(hex: string): string {
   if (hex.startsWith("0x")) {
